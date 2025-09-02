@@ -1,6 +1,6 @@
 
 [project]
-name = "mcp-ask-llm"
+name = "mcp-askllm"
 version = "0.1.0"
 description = "An MCP server to ask LLMs"
 requires-python = ">=3.8"
