@@ -12,4 +12,7 @@ dependencies = [
 ]
 
 [project.scripts]
-start-mcp-server = "server:main"
+mcp-askllm = "server:main"
+
+[tool.setuptools]
+py-modules = ["server"]
