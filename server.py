@@ -1,7 +1,10 @@
 import asyncio
 import os
+from dotenv import load_dotenv
 from fastmcp import FastMCP
 from litellm import completion
+
+load_dotenv()
 
 mcp = FastMCP()
 
@@ -62,8 +65,20 @@ def ask(llm: str, prompt: str) -> str:
         return f"Error: {e}"
 
 
+import json
+
 def main():
-    mcp.run(transport="stdio")
+    import sys
+    if len(sys.argv) > 1:
+        request_str = sys.argv[1]
+        request = json.loads(request_str)
+        llm = request["params"][0]
+        prompt = request["params"][1]
+        result = ask.fn(llm, prompt)
+        response = {"jsonrpc": "2.0", "id": request["id"], "result": result}
+        print(json.dumps(response))
+    else:
+        mcp.run(transport="stdio")
 
 if __name__ == "__main__":
     main()
